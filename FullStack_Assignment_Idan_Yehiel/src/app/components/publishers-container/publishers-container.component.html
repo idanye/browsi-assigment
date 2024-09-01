@@ -1,0 +1,31 @@
+<div class="publishers-container">
+    <div>
+      <h3>Add Publisher</h3>
+      <form [formGroup]="publisherForm" (ngSubmit)="addPublisher()">
+        <label for="publisher">Publisher Name:</label>
+        <input id="publisher" formControlName="publisher" required>
+
+        <h4>Domains</h4>
+        <div formArrayName="domains">
+          <div *ngFor="let domain of addedDomains; let i = index" [formGroupName]="i">
+            <label for="url-{{i}}">Url:</label>
+            <input id="url-{{i}}" formControlName="url" required>
+
+            <label for="desktopAds-{{i}}">Desktop Ads:</label>
+            <input id="desktopAds-{{i}}" type="number" formControlName="desktopAds" required>
+
+            <label for="mobileAds-{{i}}">Mobile Ads:</label>
+            <input id="mobileAds-{{i}}" type="number" formControlName="mobileAds" required>
+          </div>
+        </div>
+
+        <button type="button" (click)="addDomain()">Add Domain</button>
+        <button type="submit">Add Publisher</button>
+
+      </form>
+    </div>
+
+    <div>
+        <app-publisher-card *ngFor="let publisher of publishers" [publisher]="publisher"></app-publisher-card>
+    </div>
+</div>
